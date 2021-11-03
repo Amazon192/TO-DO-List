@@ -2,14 +2,19 @@ const express=require("express");
 const bodyparser=require("body-parser");
 const date=require(__dirname+"/date.js");
 const mongoose=require("mongoose");
+var dotenv = require('dotenv'); 
+dotenv.config();
+var uri=process.env.URL_APP;
+
 
 const app=express();
+
 app.set('view engine', 'ejs');
 
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
-mongoose.connect('mongodb+srv://dbPrat:test123@cluster0.drliy.mongodb.net/todolistDB?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const x=new mongoose.Schema({
    name:String
